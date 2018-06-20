@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+<link rel="stylesheet" href="css/pintuer.css">
+<link rel="stylesheet" href="css/admin.css">
+<script src="js/jquery.js"></script>
+<script src="js/pintuer.js"></script>
+  <script src="js/ajax.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/vue.min.js"></script>
+</head>
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>新品发布</strong></div>
+  <div class="body-content">
+    <form method="post" class="form-x" action="" enctype="multipart/form-data" id="form1">
+      <div class="form-group">
+        <div class="label">
+          <label>手机名字：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="" id="gname" name="gname" data-validate="required:请输入手机名" />
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label>手机图片：</label>
+        </div>
+        <div class="field">
+          <input type="file" class="button bg-blue margin-left" id="image1" value="+ 浏览上传"  style="float:left;"  name="file">
+          <div class="tipss">图片尺寸：500*500</div>
+        </div>
+      </div>
+
+      <if condition="$iscid eq 1">
+        <div class="form-group">
+          <div class="label">
+            <label>手机类别：</label>
+          </div>
+          <div class="field" >
+            <select  class="input w50"  id="lid" name="lid" >
+              <option disabled  value="2131">请选择类型</option>
+            </select>
+            <div class="tips"></div>
+          </div>
+        </div>
+      </if>
+      <div class="form-group">
+        <div class="label">
+          <label>描述：</label>
+        </div>
+        <div class="field">
+          <input  type="text" name="miao" class="input w50" id="miao"   value="">
+          <div class="tips"></div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <div class="form-group">
+        <div class="label">
+          <label>价格：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50"  id="prize" name="price" value="0"  data-validate="number:排序必须为数字" />
+          <div class="tips"></div>
+        </div>
+      </div>
+      <br>
+      <div class="form-group">
+        <div class="label">
+          <label></label>
+        </div>
+        <div class="field">
+          <button class="button bg-main icon-check-square-o" type="button" id="tijiao"> 提交</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+<script src="js/users.js"></script><script src="js/tips.js"></script>
+<script type="text/javascript" src="js/ajaxfileupload.js"></script>
+
+<script type="text/javascript">
+    $("#tijiao").click(function(){
+
+        var form=document.getElementById("form1");
+        var fd =new FormData(form);
+     /* var sd=  $.ajaxFileUpload("../api/goods/upload","post",fd);
+        alert(sd.data);*/
+        $.ajax({
+            url: "../api/goods/upload",
+            type: 'post',
+            data: fd,
+            async: false,
+            cache: false,
+            processData: false,  // 告诉jQuery不要去处理发送的数据
+            contentType: false,   // 告诉jQuery不要去设置Content-Type请求头
+            success: function (data) {
+                alert(data.data);
+            }
+        })
+
+    })
+</script>
+
+</html>
+

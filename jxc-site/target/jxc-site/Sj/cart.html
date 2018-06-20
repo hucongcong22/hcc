@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+	
+    <title>Mobile Shop</title>
+	
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css"  type="text/css">
+	
+	<!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+	
+	
+	<!-- Custom Fonts -->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"  type="text/css">
+    <link rel="stylesheet" href="fonts/font-slider.css" type="text/css">
+	
+	<!-- jQuery and Modernizr-->
+	<script src="js/jquery-2.1.1.js"></script>
+	
+	<!-- Core JavaScript Files -->  	 
+    <script src="js/bootstrap.min.js"></script>
+	
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!--Top-->
+<nav id="top">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-6">
+
+			</div>
+			<div class="col-xs-6" id="ren">
+				<ul class="top-link">
+					<li><a href="account.html" v-if="as==0"><span class="glyphicon glyphicon-user"></span>登陆</a><p v-if="as==1">欢迎{{uname}}</p></li>
+					<li><a  href="javascript:void(0)" v-on:click="dianjia()"><span class="glyphicon glyphicon-shopping-cart"></span>购物车</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</nav>
+
+<nav id="menu" class="navbar">
+	<div class="container">
+		<div class="navbar-header"><span id="heading" class="visible-xs">Categories</span>
+			<button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
+		</div>
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="index.html">首页</a></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle" >手机品牌</a>
+
+				</li>
+				<li class="dropdown"><a href="category.html" class="dropdown-toggle" >特价手机</a>
+
+				</li>
+				<li><a href="javascript:void(0)">待定</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+	<div id="page-content" class="single-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<ul class="breadcrumb">
+						<li><a href="index.html">首页</a></li>
+						<li><a href="cart.html">购物车</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="row" id="cat" >
+				<div class="product well" v-for="sd in odersxiangList">
+					<div class="col-md-3">
+						<div class="image">
+							<img :src="kk+ sd.tupian " width="165px" height="300px" />
+						</div>
+					</div>
+					<div class="col-md-9" >
+						<div class="caption">
+							<div class="name"><h3><a href="javascript:void(0)">{{sd.gname}}</a></h3></div>
+							<div class="info">	
+								<ul>
+									<li>{{sd.miao}}</li>
+									<li>{{sd.gid}}</li>
+								</ul>
+							</div>
+							<div class="price">{{sd.zhekou}}<span>{{sd.price}}</span></div>
+							<label>数量:</label> <input class="form-inline quantity" type="text" v-model="sd.shuliang" id="sa"><span>{{sd.oderprize}}</span>
+							<hr>
+							<a href="javascript:void(0)" class="btn btn-default pull-right" v-on:click="delect(sd.oderid)">删除</a>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4 col-md-offset-8 ">
+					<center><a href="index.html" class="btn btn-1">继续购物</a></center>
+				</div>
+			</div>
+			<div class="row" id="jie">
+				<div class="pricedetails">
+					<div class="col-md-4 col-md-offset-8">
+						<table v-for="(j,index) in oderList" v-if="index==0">
+							<h6>订单</h6>
+							<tr>
+								<td>订单编号</td>
+								<td v-model="oid">{{j.oid}}</td>
+							</tr>
+
+							<tr style="border-top: 1px solid #333">
+								<td><h5>总计</h5></td>
+								<td>{{j.money}}</td>
+							</tr>
+						</table>
+						<center><a href="javascript:void(0)" class="btn btn-1" v-on:click="jisuan()">结算</a></center>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="js/vue.min.js"></script>
+<script src="js/ajax.js"></script>
+<script src="js/Usersa.js"></script>
+<script src="js/cart.js"></script>
+</html>

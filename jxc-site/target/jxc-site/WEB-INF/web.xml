@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>Archetype Created Web Application</display-name>
+	<!-- Spring和mybatis的配置文件 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+            classpath:spring-context.xml
+        </param-value>
+	</context-param>
+	<!-- 编码过滤器 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<async-supported>true</async-supported>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+    <!-- url重写过滤器 -->
+    <!--<filter>-->
+        <!--<filter-name>UrlRewriteFilter</filter-name>-->
+        <!--<filter-class>LoginRewriteFilter</filter-class>-->
+        <!--&lt;!&ndash;<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>&ndash;&gt;-->
+        <!--&lt;!&ndash;-->
+            <!--设备文件重加载间隔 (0默示随时加载， -1默示不重加载， 默认-1)-->
+        <!--&ndash;&gt;-->
+        <!--<init-param>-->
+            <!--<param-name>confReloadCheckInterval</param-name>-->
+            <!--<param-value>60</param-value>-->
+        <!--</init-param>-->
+
+        <!--&lt;!&ndash;-->
+            <!--设置日志级别（将被记录到日志中）-->
+               <!--可以为: TRACE, DEBUG, INFO (default), WARN, ERROR, FATAL, log4j, commons, slf4j,-->
+               <!--比如 sysout:DEBUG（设置到控制台调试输出级别）-->
+            <!--(默认级别 WARN) &ndash;&gt;-->
+        <!--<init-param>-->
+            <!--<param-name>logLevel</param-name>-->
+            <!--<param-value>DEBUG</param-value>-->
+        <!--</init-param>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>UrlRewriteFilter</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+        <!--<dispatcher>REQUEST</dispatcher>-->
+        <!--<dispatcher>FORWARD</dispatcher>-->
+    <!--</filter-mapping>-->
+
+	<listener>
+    	<listener-class>com.aifule.jxc.site.web.listener.SessionListener</listener-class>
+	</listener>
+	<!-- Spring监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- 防止Spring内存溢出监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+
+	<!-- Spring MVC servlet -->
+	<servlet>
+		<servlet-name>SpringMVC</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SpringMVC</servlet-name>
+		<url-pattern>/api/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>ImageServlet</servlet-name>
+		<servlet-class>com.aifule.jxc.site.interceptor.ImageServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ImageServlet</servlet-name>
+		<url-pattern>/servlet/ImageServlet</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>/index.html</welcome-file>
+	</welcome-file-list>
+	<!--<error-page>-->
+	    <!--<error-code>400</error-code>-->
+	    <!--<location>/redirect.jsp</location>-->
+	<!--</error-page>-->
+
+    <!--<security-constraint>-->
+        <!--<web-resource-collection>-->
+            <!--<web-resource-name>securedapp</web-resource-name>-->
+            <!--<url-pattern>/*</url-pattern>-->
+        <!--</web-resource-collection>-->
+        <!--<user-data-constraint>-->
+            <!--<transport-guarantee>CONFIDENTIAL</transport-guarantee>-->
+        <!--</user-data-constraint>-->
+    <!--</security-constraint>-->
+
+	<error-page>
+	    <error-code>404</error-code>
+	    <location>/redirect.jsp</location>
+	</error-page>
+
+	<error-page>
+	    <error-code>500</error-code>
+	    <location>/redirect.jsp</location>
+	</error-page>
+</web-app>

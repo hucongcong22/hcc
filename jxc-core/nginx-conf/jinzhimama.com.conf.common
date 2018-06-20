@@ -1,0 +1,134 @@
+#proxy_intercept_errors on;
+#proxy_ignore_client_abort on;
+#set_real_ip_from   10.0.0.0/8;
+#real_ip_header     X-Real-IP;
+#proxy_cache_path /data/var/tieba.yy.com/proxy_cache/tieba  levels=2:2 keys_zone=tieba_cache:100m inactive=24h max_size=2048m;
+
+
+#limit_req_zone $binary_remote_addr zone=mytieba:10m  rate=50r/s;
+#limit_req_zone $binary_remote_addr zone=tiebaSign:10m  rate=10r/s;
+
+server {
+
+        listen       80;
+        server_name jinzhimama.com   www.jinzhimama.com;
+		error_log  logs/jinzhimama.com.log  warn;
+		
+		location / {
+			root	 /data/webapps/tieba.yy.com/tieba/static/;
+			concat on;
+			index  index.html index.htm;
+			expires 10s;
+			error_page 404 @page_not_found;
+            if ($host ~ .*yy\.com) {
+                 add_header Access-Control-Allow-Origin *;
+                 add_header Access-Control-Allow-Headers X-Requested-With;
+                 add_header Access-Control-Allow-Methods GET,POST;
+            }
+		}
+	
+		location /tieba/ {
+			alias	 /data/webapps/tieba.yy.com/tieba/static/;
+			concat on;
+			index  index.html index.htm;
+			expires 10s;
+			error_page 404 @page_not_found;
+		}
+
+		location /htmlized/ {
+			alias	 /data/webapps/htmlized/tieba/;
+			concat on;
+			index  index.html index.htm;
+			expires 10s;
+			error_page 404 @page_not_found;
+		}
+
+		location /tieba/data/ {
+			alias	 /data/webapps/htmlized/tieba/data/;
+			add_header Content-Type "application/json;charset=UTF-8";
+			expires 10m;
+			error_page 404 @page_not_found;
+		}
+
+		location ~ /hall/pushThreadPost/([0-9]+)/([0-9]+)\.html {
+			root	 /data/webapps/tieba.yy.com/tieba/static/;
+			expires 10s;
+			if (!-f $request_filename) {
+				rewrite /hall/pushThreadPost/([0-9]+)/([0-9]+)\.html /tieba/htmlAndReturnPostPage.action?tiebaId=$1&threadId=$2 last;
+			}
+		}
+		
+		location ~ ^/tieba/uploadImage.action{
+			proxy_connect_timeout 300s;
+			proxy_read_timeout 300s;
+			proxy_send_timeout 300s;
+			proxy_set_header Accept-Encoding "";
+			proxy_set_header Host $host;
+			proxy_set_header X-Real-IP $remote_addr;
+			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+			proxy_pass http://tieba_localhost;         
+			proxy_http_version 1.1;
+			proxy_set_header Connection "";
+			error_page 404 @page_not_found;
+			client_max_body_size 100m;
+		}
+		
+		location ~ ^/tieba/uploadVideo.action{
+			proxy_connect_timeout 300s;
+			proxy_read_timeout 300s;
+			proxy_send_timeout 300s;
+			proxy_set_header Accept-Encoding "";
+			proxy_set_header Host $host;
+			proxy_set_header X-Real-IP $remote_addr;
+			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+			proxy_pass http://tieba_localhost;         
+			proxy_http_version 1.1;
+			proxy_set_header Connection "";
+			error_page 404 @page_not_found;
+			client_max_body_size 100m;
+		}
+		
+		 location ~ .*.(jsp|action|svt)$ {
+			proxy_set_header Accept-Encoding "";
+			proxy_set_header Host $host;
+			proxy_set_header X-Real-IP $remote_addr;
+			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+			proxy_pass http://tieba_localhost;         
+			proxy_http_version 1.1;
+			proxy_set_header Connection "";
+			error_page 404 @page_not_found;
+			client_max_body_size 100m;
+
+            if ($host ~ .*yy\.com) {
+                 add_header Access-Control-Allow-Origin *;
+                 add_header Access-Control-Allow-Headers X-Requested-With;
+                 add_header Access-Control-Allow-Methods GET,POST;
+            }
+		}
+			
+		location /nginx_status {
+			stub_status on;
+			access_log off;
+		}
+		
+		location @page_not_found {
+					if ($request_uri ~* .*\.(gif|png|jpg|jpeg|bmp|xml|css|js|ejs)$) {
+							break;
+					}
+					if ($http_user_agent ~* (mobile|nokia|iphone|ipad|android|samsung|htc|blackberry)) {
+						rewrite ^/(.*)$ /mobile/html/404.html last;
+					}
+					if ($http_user_agent !~* (mobile|nokia|iphone|ipad|android|samsung|htc|blackberry)) {
+						rewrite ^/(.*)$ /pc/html/404.html last;	
+					}
+					
+			}
+
+        error_page  404  /404.html;
+
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }   
+
+    }

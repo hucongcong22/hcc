@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+	
+    <title>Mobile Shop</title>
+	
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css"  type="text/css">
+	
+	<!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+	
+	
+	<!-- Custom Fonts -->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"  type="text/css">
+    <link rel="stylesheet" href="fonts/font-slider.css" type="text/css">
+	
+	<!-- jQuery and Modernizr-->
+	<script src="js/jquery-2.1.1.js"></script>
+	
+	<!-- Core JavaScript Files -->  	 
+    <script src="js/bootstrap.min.js"></script>
+	
+
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+	<!--Top-->
+	<nav id="top">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-6">
+
+				</div>
+				<div class="col-xs-6" id="ren">
+					<ul class="top-link">
+						<li><a href="account.html" v-if="as==0"><span class="glyphicon glyphicon-user"></span>登陆</a><p v-if="as==1">欢迎{{uname}}</p></li>
+						<li><a  href="javascript:void(0)" v-on:click="dianjia()"><span class="glyphicon glyphicon-shopping-cart"></span>购物车</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</nav>
+    <nav id="menu" class="navbar">
+		<div class="container">
+			<div class="navbar-header"><span id="heading" class="visible-xs">Categories</span>
+			  <button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
+			</div>
+			<div class="collapse navbar-collapse navbar-ex1-collapse" id="daohang">
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">首页</a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">手机品牌</a>
+						<div class="dropdown-menu">
+							<div class="dropdown-inner">
+								<ul class="list-unstyled">
+									<li v-for="ln in goodsleiList"><a href="category.html">{{ln.lname}} </a></li>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<li class="dropdown"><a href="category.html" class="dropdown-toggle" >特价手机</a>
+					</li>
+					<li><a href="javascript:void(0)">待定</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div id="page-content" class="home-page">
+		<div class="container">
+			<div class="row" id="luern">
+				<div class="col-lg-12">
+					<!-- Carousel -->
+					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+						<!-- Indicators -->
+						<ol class="carousel-indicators hidden-xs" >
+							<li data-target="#carousel-example-generic" data-slide-to="0"  v-for="(ph,index) in photoList" :class="[index == 0 ? 'active' : '']"></li>
+
+						</ol>
+						<!-- 首页轮播 -->
+						<div class="carousel-inner">
+							<div  v-for="(ph,index) in photoList" :class="[index == 0 ? 'item active' : 'item']">
+								<img :src="kk+ph.photoname" >
+								<!-- Static Header -->
+							</div>
+
+						</div>
+						<!-- Controls -->
+						<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+							<span class="glyphicon glyphicon-chevron-left"></span>
+						</a>
+						<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+							<span class="glyphicon glyphicon-chevron-right"></span>
+						</a>
+					</div><!-- /首页-->
+				</div>
+			</div>
+			<div class="row">
+				<div class="banner">
+					<div class="col-sm-4">
+						<img src="images/sub-banner1.png" />
+					</div>
+					<div class="col-sm-4">
+						<img src="images/sub-banner2.png" />
+					</div>
+					<div class="col-sm-4">
+						<img src="images/sub-banner3.png" />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12" id="youhui">
+					<div class="heading"><h2>特价产品</h2></div>
+					<div class="products">
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" v-for="(you,index) in  youhuiList" v-if="index<4&&you.gstate!='下架'">
+							<div class="product">
+								<div class="image"><a href="javascript:void(0)"><img :src="kk+you.tupian" width="165px" height="300px"/></a></div>
+								<div class="buttons">
+									<a class="btn cart" href="javascript:void(0)" v-on:click="shuangji(you.gid,you.ymoney)"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+								</div>
+								<div class="caption">
+									<div class="name"><h3><a href="javascript:void(0)">{{you.gname}}&emsp;{{you.miao}}</a></h3></div>
+									<div class="price">{{you.ymoney}}：元<span>{{you.price}}：元</span></div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="banner">
+					<div class="col-sm-6">
+						<img src="images/sub-banner4.jpg" />
+					</div>
+					<div class="col-sm-6">
+						<img src="images/sub-banner5.png" />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="heading"><h2>新上架产品</h2></div>
+					<div class="products" id="xs">
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" v-for="(ng,index) in goodsboList" v-if="index<4  && ng.gstate!='下架'">
+							<div class="product">
+								<div class="image"><a href="javascript:void(0)"><img :src="kk+ng.tupian" width="165px" height="300px"/></a></div>
+								<div class="buttons">
+									<a class="btn cart" href="javascript:void(0)" v-on:click="updata(ng.gid,ng.ymoney)"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+								</div>
+								<div class="caption">
+									<div class="name"><h3><a href="javascript:void(0)">{{ng.gname}}&emsp;{{ng.miao}}</a></h3></div>
+									<div class="price">{{ng.ymoney}}:元</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="js/vue.min.js"></script>
+<script src="js/ajax.js"></script>
+<script src="js/Usersa.js"></script>
+<script src="js/index.js"></script>
+</html>

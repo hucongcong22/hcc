@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+    <context id="jxc" targetRuntime="MyBatis3" defaultModelType="flat">
+
+        <!-- 实现自定义的代码生成器plugin -->
+        <plugin type="com.tools.mybatis.CustomPlugin" />
+
+        <!--<plugin type="org.mybatis.generator.plugins.AddLimitOffsetPlugin"/>-->
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <!-- remove comments -->
+            <property name="suppressAllComments" value="false"/>
+        </commentGenerator>
+
+
+        <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+        <!-- jdbc connection -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/sjsc?useUnicode=true&amp;characterEncoding=UTF-8"
+                        userId="root" password="23456">
+        </jdbcConnection>
+        <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+        <!-- java type resolver -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+        <!-- gem entity -->
+        <javaModelGenerator targetPackage="com.aifule.jxc.core.domain"
+                            targetProject="../jxc-core/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+        <!-- gem sq1 map -->
+        <sqlMapGenerator targetPackage="com.aifule.jxc.core.mapper"
+                         targetProject="../jxc-core/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+        <!-- gem  com.aifule.jxc.core.mapper -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.aifule.jxc.core.dao.mysql"
+                             targetProject="../jxc-core/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+         <table tableName="users" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+                enableSelectByExample="false" selectByExampleQueryId="false" >
+             <generatedKey column="id" sqlStatement="JDBC" />
+         </table>
+         <!--<table tableName="admins" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
+                <!--enableSelectByExample="false" selectByExampleQueryId="false" >-->
+             <!--<generatedKey column="id" sqlStatement="JDBC" />-->
+         <!--</table>-->
+                <!--<table tableName="address" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false" >-->
+            <!--<generatedKey column="id" sqlStatement="JDBC" />-->
+        <!--</table>-->
+        <!--<table tableName="goods" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>-->
+             <!--<table tableName="goodslei" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false" >-->
+            <!--<generatedKey column="id" sqlStatement="JDBC" />-->
+        <!--</table>-->
+             <!--<table tableName="inventory" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
+              <!--enableSelectByExample="false" selectByExampleQueryId="false" >-->
+           <!--<generatedKey column="id" sqlStatement="JDBC" />-->
+       <!--</table>-->
+      <!--<table tableName="odersxiang" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>-->
+
+      <table tableName="orders" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+
+             <!-- <table tableName="goodsmiao" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+              enableSelectByExample="false" selectByExampleQueryId="false" >
+           <generatedKey column="id" sqlStatement="JDBC" />
+       </table>-->
+ <!--       <table tableName="company" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>-->
+<!--        <table tableName="warehouse" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>-->
+       <!--  <table tableName="store" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+                enableSelectByExample="false" selectByExampleQueryId="false" >
+             <generatedKey column="id" sqlStatement="JDBC" />
+         </table>-->
+     <!--   <table tableName="other_store_in_detail" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>-->
+        <!--<table tableName="other_store_out" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false" >-->
+            <!--<generatedKey column="id" sqlStatement="JDBC" />-->
+        <!--</table>-->
+        <!--<table tableName="other_store_out_detail" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false" >-->
+            <!--<generatedKey column="id" sqlStatement="JDBC" />-->
+        <!--</table>-->
+    <!--    <table tableName="sales_money_in" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>-->
+<!--         <table tableName="goods" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>-->
+        <!--<table tableName="units" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false" >-->
+            <!--<generatedKey column="id" sqlStatement="JDBC" />-->
+        <!--</table>-->
+
+ <!--                <table tableName="units_group" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>-->
+  <!--       <table tableName="goods" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>-->
+ <!--       <table tableName="specification" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>-->
+        <!--   <table tableName="store" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+                enableSelectByExample="false" selectByExampleQueryId="false" >
+             <generatedKey column="id" sqlStatement="JDBC" />
+         </table>-->
+ <!--        <table tableName="sales" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="id" sqlStatement="JDBC" />
+         </table>-->
+    <!--  <table tableName="sales_detail" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="id" sqlStatement="JDBC" />
+      </table>-->
+      <!--<table tableName="sales_detail" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false" >-->
+            <!--<generatedKey column="id" sqlStatement="JDBC" />-->
+      <!--</table>-->
+<!--      <table tableName="sales" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>-->
+      <!--  <table tableName="purchase_detail" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+                enableSelectByExample="false" selectByExampleQueryId="false" >
+             <generatedKey column="id" sqlStatement="JDBC" />
+        </table>-->
+<!--            <table tableName="purchase" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>-->
+<!--          <table tableName="sales_store_out" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+              enableSelectByExample="false" selectByExampleQueryId="false" >
+           <generatedKey column="id" sqlStatement="JDBC" />
+       </table>
+        <table tableName="sales_store_out_detail" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>-->
+<!--          <table tableName="client" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+        enableSelectByExample="false" selectByExampleQueryId="false" >
+     <generatedKey column="id" sqlStatement="JDBC" />
+ </table>-->
+    <!--              <table tableName="purchase_store_in" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+                       enableSelectByExample="false" selectByExampleQueryId="false" >
+                    <generatedKey column="id" sqlStatement="JDBC" />
+                </table>
+                <table tableName="purchase_store_in_detail" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+                       enableSelectByExample="false" selectByExampleQueryId="false" >
+                    <generatedKey column="id" sqlStatement="JDBC" />
+                </table>-->
+                  <table tableName="purchase_money_out" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+                       enableSelectByExample="false" selectByExampleQueryId="false" >
+                    <generatedKey column="id" sqlStatement="JDBC" />
+                </table>
+        <table tableName="sales_money_in" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+
+ <!--           <table tableName="warehouse" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+             enableSelectByExample="false" selectByExampleQueryId="false" >
+          <generatedKey column="id" sqlStatement="JDBC" />
+      </table>-->
+     <!--   <table tableName="warehouse" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>-->
+
+    </context>
+</generatorConfiguration>

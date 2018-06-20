@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title>商品管理</title>
+    <link rel="stylesheet" href="css/pintuer.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/pintuer.js"></script>
+    <script src="js/ajax.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/vue.min.js"></script>
+</head>
+<div id="luenbo">
+<div class="panel-head"><strong class="icon-reorder"> 轮播列表</strong></div>
+<div class="padding border-bottom">
+    <a class="button border-yellow" href="#tianjia"><span class="icon-plus-square-o"></span> 图片展示</a>
+</div>
+<table class="table table-hover text-center" >
+    <tr>
+        <th width="10%">图片编号</th>
+        <th>图片展示</th>
+        <th width="250">操作</th>
+    </tr>
+
+    <tr v-for="f in photosList" >
+        <td>{{f.photoid}}</td>
+        <td><img  :src="sd+f.photoname" width="400px" height="100px"></td>
+        <td>
+            <div class="button-group">
+                <a class="button border-red" href="javascript:void(0)" v-on:click="delect(f.photoid)" >
+                    <span class="icon-trash-o"></span>删除</a>
+            </div>
+        </td>
+    </tr>
+</table>
+    <div class="body-content">
+    <form method="post" class="form-x"  enctype="multipart/form-data" id="form1">
+        <div class="form-group">
+            <div class="label">
+                <label>请选择图片：</label>
+            </div>
+        <div class="field">
+            <input type="file" class="button bg-blue margin-left" id="image1" value="+ 浏览上传"  style="float:left;"  name="file">
+            <div class="tipss">图片尺寸：500*500</div>
+        </div>
+        </div>
+        <div class="form-group">
+            <div class="label">
+                <label></label>
+            </div>
+        <div class="field">
+            <button class="button bg-main icon-check-square-o" type="button" v-on:click="tijiao()"> 提交</button>
+        </div>
+        </div>
+    </form>
+    </div>
+</div>
+</body>
+
+<script type="text/javascript">
+
+   /* $("#asd").click(function () {
+        alert("shabi")
+    })*/
+   /* $("#tijiao1").click(function(){
+       alert("ppp")
+        var form=document.getElementById("form1");
+        var fd =new FormData(form);
+        /!* var sd=  $.ajaxFileUpload("../api/goods/upload","post",fd);
+           alert(sd.data);*!/
+        $.ajax({
+            url: "../api/luenbo/insert",
+            type: 'post',
+            data: fd,
+            async: false,
+            cache: false,
+            processData: false,  // 告诉jQuery不要去处理发送的数据
+            contentType: false,   // 告诉jQuery不要去设置Content-Type请求头
+            success: function (data) {
+                alert(data.data);
+            }
+        })
+
+    })*/
+</script>
+<script src="js/users.js"></script>
+<script src="js/luenbo.js"></script>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+<link rel="stylesheet" href="css/pintuer.css">
+<link rel="stylesheet" href="css/admin.css">
+<script src="js/jquery.js"></script>
+<script src="js/pintuer.js"></script>
+  <script src="js/ajax.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/vue.min.js"></script>
+</head>
+<body>
+<div class="panel admin-panel"  id="warehouse">
+  <div class="panel-head"><strong class="icon-reorder"> 内容列表</strong></div>
+  <div class="padding border-bottom">  
+  <a type="button" class="button border-yellow"   href="#tianjia" ><span class="icon-plus-square-o"></span> 添加仓库</a>
+  </div>
+  <table class="table table-hover text-center">
+    <tr>
+      <th width="10%">仓库编号</th>
+      <th width="15%">名称</th>
+      <th width="20%">描述</th>
+      <th width="10%">地址</th>
+      <th width="15%">操作</th>
+    </tr>
+   
+    <tr v-for="f in warehouseList">
+      <td>{{f.serialNo}}</td>
+      <td>{{f.name}}</td>
+      <td>{{f.info}}</td>
+      <td>{{f.address}}</td>
+      <td><div class="button-group">
+        <a type="button" class="button border-main" href="#tianjia"  v-on:click="updata(f.id ,f.name,f.type,f.info)" ><span class="icon-edit"  ></span>修改</a>
+        <a class="button border-red" href="javascript:void(0)" v-on:click="deleted(f.id)"><span class="icon-trash-o"></span> 删除</a>
+      </div></td>
+    </tr>
+  </table>
+</div>
+<script info="text/javascript">
+function del(id,mid){
+	if(confirm("您确定要删除吗?")){
+	
+	}
+}
+</script>
+<a name="tianjia"></a>
+<div class="panel admin-panel margin-top"  id="warehouseWrite" >
+  <div class="panel-head"><strong><span class="icon-pencil-square-o"></span> 增加/修改仓库</strong></div>
+  <div class="body-content">
+    <form method="post" class="form-x" action="">    
+      <div class="form-group">
+        <div class="label">
+          <label>仓库名称：</label>
+        </div>
+        <div class="field">
+          <input info="text" class="input w50" name="title" value="" data-validate="required:请输入仓库名称"  v-model="name"/><p v-if="t1==1"><font color="red">仓库已存在</font></p><p v-if="t1==2"><font color="green"></font></p>
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label>仓库地址</label>
+        </div>
+        <div class="field">
+          <input info="text" class="input w50" name="url" value=""   v-model="address"/>
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label>描述：</label>
+        </div>
+        <div class="field">
+          <textarea info="text" class="input" name="note" style="height:120px;" value=""   v-model="info"></textarea>
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label></label>
+        </div>
+        <div class="field">
+          <button class="button bg-main icon-check-square-o"  v-on:click="updata" v-if="gai==1"> 修改</button><a  href="javascript:void(0)" v-on:click="huan"  v-if="gai==1">新增仓库</a><button class="button bg-main icon-check-square-o"  v-on:click="submit" v-if="gai==0"> 新增</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+<script src="js/warehouse.js">
+    <script src="js/users.js"></script>
+</script>
+</html>

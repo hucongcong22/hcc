@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title>订单管理</title>
+    <link rel="stylesheet" href="css/pintuer.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/pintuer.js"></script>
+    <script src="js/ajax.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+<div class="panel admin-panel" id="orders">
+    <div class="panel-head"><strong class="icon-reorder"> 订单列表</strong></div>
+    <div class="padding border-bottom">
+        <a class="button border-yellow" href="#tianjia"><span class="icon-plus-square-o"></span> 订单展示</a>
+    </div>
+    <table class="table table-hover text-center" v-if="at==0">
+        <tr>
+            <th width="10%">订单编号</th>
+            <th>客户名称</th>
+            <th>交易时间</th>
+            <th>交易金额</th>
+            <th>交易状态</th>
+            <th>地址</th>
+            <th>详情显示</th>
+            <th width="250">操作</th>
+        </tr>
+
+        <tr v-for="f in ordersList" v-if="f.oderstate!='预交易'">
+            <td>{{f.oid}}</td>
+            <td>{{f.uname}}</td>
+            <td>{{f.datea}}</td>
+            <td>{{f.money}}</td>
+            <td>{{f.oderstate}}</td>
+            <td>{{f.address}}</td>
+            <th><a class="button border-main" v-on:click="dian(f.oid)">点击查看详情</a></th>
+            <td>
+                <div class="button-group">
+                    <a class="button border-red" href="javascript:void(0)" v-on:click="xiou(f.oid)">
+                        <span class="icon-trash-o"></span>交易取消</a>
+
+                </div>
+            </td>
+        </tr>
+    </table>
+    <table class="table table-hover text-center" v-if="at==1">
+        <tr>
+            <th width="10%">编号</th>
+            <th>商品名称</th>
+            <th>商品数量</th>
+            <th>原价</th>
+            <th>折扣价</th>
+            <th>小计</th>
+            <th width="250">操作</th>
+        </tr>
+
+        <tr v-for="f in ordersxiangList">
+            <td>{{f.oderid}}</td>
+            <td>{{f.gname}}</td>
+            <td>{{f.shuliang}}</td>
+            <td>{{f.price}}</td>
+            <td>{{f.zhekou}}</td>
+            <td>{{f.oderprize}}</td>
+
+            <td>
+                <div class="button-group">
+                    <a type="button" class="button border-main" href="orders.html">
+                        <span class="icon-edit">返回</span></a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+<script src="js/users.js"></script>
+<script src="js/orders.js"></script>
+</html>

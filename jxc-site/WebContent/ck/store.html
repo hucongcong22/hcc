@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" href="css/pintuer.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/pintuer.js"></script>
+    <script src="js/ajax.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/vue.min.js"></script>
+
+</head>
+<body>
+<div method="post" action="" id="lan">
+    <div class="panel admin-panel">
+        <div class="panel-head"><strong class="icon-reorder"> 内容列表</strong> <a href=""
+                                                                               style="float:right; display:none;">添加字段</a>
+        </div>
+        <div class="padding border-bottom">
+            <ul class="search" style="padding-left:10px;">
+                <li>搜索：</li>
+                <li>首页
+                </li>
+                <if condition="$iscid eq 1">
+                    <li>
+                        <select name="cid" class="input" style="width:200px; line-height:17px;"
+                                onchange="changesearch()">
+                            <option v-bind:value="f.id" v-for="f in warehouseList">{{f.name}}</option>
+                        </select>
+                    </li>
+                </if>
+                <li>
+                    <input type="text" placeholder="请输入商品名" name="keywords" class="input"
+                           style="width:250px; line-height:17px;display:inline-block" v-model="goodsName"/>
+                </li>
+            </ul>
+        </div>
+        <table class="table table-hover text-center">
+            <tr>
+                <td style="text-align:left; padding-left:20px;"></td>
+                <th width="110px">商品编号</th>
+                <th width="30%">商品名</th>
+                <th>属性</th>
+                <th width="20%">所在仓库</th>
+                <th width="10%">商品库存</th>
+            </tr>
+            <div id="stores">
+                <div name="list" id="vo">
+                    <tr v-for="f in storeList">
+                        <td style="text-align:left; padding-left:20px;"></td>
+                        <td width="110px">{{f.goodsNum}}</td>
+                        <td width="30%">{{f.goodsName}}</td>
+                        <td>{{f.goodsType}}</td>
+                        <td width="20%">{{f.warehouseName}}</td>
+                        <td width="10%">{{f.num}}</button></td>
+                        <td>
+                        </td>
+                    </tr>
+                </div>
+            </div>
+            <volist name="list" id="vo">
+                <tr>
+                    <td colspan="7" style="text-align:left;padding-left:20px;">
+                        <select name="ishome" style="padding:5px 15px; border:1px solid #ddd;"
+                                onchange="changeishome(this)" v-model="goodsId">
+                            <option v-bind:value="f.goodsId" v-for="f in storeList">{{f.goodsName}}</option>
+                        </select>
+                        从
+                        <select name="movecid" style="padding:5px 15px; border:1px solid #ddd;"
+                                onchange="changecate(this)" v-model="warehouseId1">
+                            <option value="">请选择仓库</option>
+                            <option v-bind:value="f.warehouseId" v-for="f in storeList" v-if="f.goodsId==goodsId">
+                                {{f.warehouseName}}
+                            </option>
+                        </select>
+                        移动到：
+                        <select name="copynum" style="padding:5px 15px; border:1px solid #ddd;"
+                                onchange="changecopy(this)" v-model="warehouseId2">
+                            <option value="">请选择仓库</option>
+                            <option v-bind:value="f.id" v-for="f in warehouseList">{{f.name}}</option>
+                        </select>
+                        <input type="text" placeholder="请输入数量" name="keywords" class="input"
+                               style="width:250px; line-height:17px;display:inline-block" v-model="num"/>
+                        <a href="javascript:void(0)" class="button border-main icon-search" onclick="changesearch()"
+                           v-on:click="submit"> 提交</a>
+                    </td>
+                </tr>
+                <!--  <tr>
+                      <td colspan="8"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
+                  </tr>-->
+            </volist>
+        </table>
+    </div>
+</div>
+</body>
+<script src="js/users.js"></script>
+<script src="js/store.js"></script>
+</html>

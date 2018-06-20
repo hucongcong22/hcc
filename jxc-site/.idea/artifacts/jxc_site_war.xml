@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="jxc-site:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="jxc-site.war">
+      <element id="artifact" artifact-name="jxc-site:war exploded" />
+    </root>
+  </artifact>
+</component>
